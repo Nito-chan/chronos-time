@@ -1,0 +1,42 @@
+export interface PhaseWindow {
+  start: number
+  end: number
+}
+
+export const PHASES = {
+  VOID: { start: 0, end: 0.15 },
+  ENERGY: { start: 0.15, end: 0.35 },
+  COSMIC: { start: 0.35, end: 0.6 },
+  TIME: { start: 0.6, end: 0.8 },
+  STRUCTURE: { start: 0.8, end: 1.0 },
+} as const
+
+export type PhaseKey = keyof typeof PHASES
+
+export function smoothstep(edge0: number, edge1: number, x: number): number {
+  const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)))
+  return t * t * (3 - 2 * t)
+}
+
+export function phaseValue(phase: number, window: PhaseWindow): number {
+  return smoothstep(window.start, window.end, Math.min(phase, window.end))
+}
+
+export function phaseRange(
+  phase: number,
+  window: PhaseWindow
+): number {
+  const t = (phase - window.start) / (window.end - window.start)
+  return Math.max(0, Math.min(1, t))
+}
+
+export function pulsePhase(
+  phase: number,
+  window: PhaseWindow,
+  count = 1
+): number {
+  const t = phaseRange(phase, window)
+  if (t <= 0 || t >= 1) return 0
+  const pos = (t * count) % 1
+  return 1 - Math.abs(pos * 2 - 1)
+}
