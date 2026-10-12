@@ -1,41 +1,39 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+const display = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
+
+const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const mono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
   title: "CHRONOS — The Operating System For Time",
   description:
-    "Observe, simulate, and navigate through the timeline of civilization. Chronos is the operating system for time itself.",
-  keywords: [
-    "chronos",
-    "time",
-    "civilization",
-    "timeline",
-    "history",
-    "simulation",
-  ],
+    "A story in seven breaths. Descend from the birth of time through stone, steam and signal — into the instrument that remembers everything. Observe. Simulate. Navigate.",
+  keywords: ["chronos", "time", "civilization", "timeline", "simulation", "deep time"],
   openGraph: {
     title: "CHRONOS — The Operating System For Time",
-    description:
-      "Observe, simulate, and navigate through the timeline of civilization.",
+    description: "A story in seven breaths. Observe. Simulate. Navigate.",
     siteName: "Chronos",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "CHRONOS — The Operating System For Time",
-    description:
-      "Observe, simulate, and navigate through the timeline of civilization.",
+    description: "A story in seven breaths. Observe. Simulate. Navigate.",
   },
 };
 
@@ -47,9 +45,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0A0A0A] text-[#F5F5F5]">
+      <body className="chronos-grain chronos-vignette min-h-full bg-[#0A0A0A] text-[#F5F5F5]">
         {children}
       </body>
     </html>
