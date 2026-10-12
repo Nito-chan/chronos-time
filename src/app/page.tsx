@@ -1,5 +1,5 @@
-import { Journey } from "@/chronos/Journey"
+import { StoryPage } from "@/thread/StoryPage"
 
 export default function ChronosPage() {
-  return <Journey />
+  return <StoryPage />
 }
